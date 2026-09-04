@@ -12,9 +12,22 @@ A real-time autonomous driving simulation combining a Unity 3D city environment 
 ![Unity simulation view](docs/unity-view.png)
 ![Live AI dashboard](docs/dashboard.png)
 
-<!-- DEMO VIDEO — add once recorded (GitHub autoplays GIFs inline, not raw video):
-![Autonoma demo](docs/demo.gif)
--->
+### Demo
+
+**Main walkthrough**
+![Main demo](docs/demo-main.gif)
+
+**Backend startup**
+![Backend startup](docs/demo-backend-start.gif)
+
+**Autonomous navigation — turning**
+![Car turning](docs/car-turning.gif)
+
+**Day/night view and camera views**
+![Day and night camera views](docs/demo-day-night-view.gif)
+
+**Live dashboard — detection in action**
+![Dashboard detection](docs/demo-dashboard-detection.gif)
 
 ---
 
@@ -116,6 +129,18 @@ Higher-priority rules always override lower ones — a deliberate design choice 
 
 A Matplotlib (TkAgg) window renders in real time: forward speed, throttle, brake, and steer as time-series graphs; the camera feed with YOLO bounding boxes and distance labels overlaid; a live vehicle trajectory map; and a status bar with collision counts, lane-adherence percentage, current action, and risk level. State is shared between the WebSocket thread and the dashboard thread via a lock-protected `DashboardState` class.
 
+### Sample AI Brain Output
+
+```
+[AI] FPS:1.1  Action:CRUISE       Risk:0   Speed:7.5m/s
+[AI] FPS:0.9  Action:YOLO STEER   Risk:50  Speed:6.7m/s
+[AI] FPS:1.3  Action:LANE KEEP RIGHT  Risk:30  Speed:6.8m/s
+[AI] FPS:1.0  Action:YOLO CAUTION Risk:20  Speed:7.2m/s
+```
+![Terminal output](docs/terminal-log.png)
+
+Each line is logged once per second, showing the currently resolved action, decision-engine risk score, live inference FPS, and vehicle speed — this is the same reasoning visible in real time on the dashboard, in plain-text form for quick debugging without the GUI open.
+
 ---
 
 ## Communication Protocol
@@ -162,7 +187,7 @@ YOLOv11s weights are **not bundled** in this repo — `ultralytics` downloads `y
 
 Once `main.py` prints `Waiting for Unity on port 9090...`, open `unity/Autonoma/` in Unity Hub and press Play. The live dashboard opens automatically; Unity connects to the running Python server.
 
-**One-command launch:** `launch.bat` automates venv activation, opens Unity, and starts `main.py`. Edit `UNITY_EXE` and `UNITY_PROJECT` inside it to match your local install path/version first.
+`launch.bat` automates venv activation and starts `main.py` for you — run it instead of the manual `venv\Scripts\activate` + `python main.py` steps above. You still open Unity yourself.
 
 > **Third-party Unity assets required, not bundled in this repo:**
 > - [Fantastic City Generator](#) (paid) — city environment, road network, traffic system
@@ -177,9 +202,10 @@ Once `main.py` prints `Waiting for Unity on port 9090...`, open `unity/Autonoma/
 - Autonomous navigation through a full procedurally-generated city, including intersection turns
 - Reliable obstacle avoidance across near/mid/far distance zones
 - Traffic-light compliance via collider-based red-light detection
-- YOLOv11s inference at ~10–12 FPS on CPU (Intel i5-6440HQ, no CUDA)
+- YOLOv11s inference on CPU (Intel i5-6440HQ, no CUDA available) starts around ~1 FPS immediately after launch during model warmup, then climbs and stabilizes in the 10–12 FPS range as the pipeline runs
+- GPU inference was not benchmarked on this hardware but is expected to substantially increase throughput given the CPU-bound nature of the current bottleneck
 
-<!-- Add measured data once logged: FPS across N runs, distance-estimation error vs. known placement, dodge-direction success rate -->
+
 
 ---
 
@@ -189,7 +215,7 @@ Once `main.py` prints `Waiting for Unity on port 9090...`, open `unity/Autonoma/
 - Distance estimation accuracy degrades beyond ~20m (pixel-resolution limits)
 - Traffic-light detection depends on the Fantastic City Generator's `Stop` collider naming convention — won't generalize to other traffic systems
 - `SocketManager.cs`'s receive loop assumes single-fragment WebSocket messages (doesn't check `EndOfMessage`); safe at the current 320×240 frame size, but needs a proper multi-fragment read before increasing resolution
-- No CUDA on the test GPU — inference is CPU-bound
+- No CUDA on the test GPU — inference is CPU-bound, with a noticeable warmup period (~1 FPS) immediately after startup before stabilizing
 
 ## Future Work
 
@@ -217,8 +243,8 @@ autonoma/
 ## Credits & Third-Party Assets
 
 - [Ultralytics YOLOv11](https://docs.ultralytics.com)
-- Fantastic City Generator — Unity Asset Store (paid, not redistributed here)
-- Prometeo Car Controller — Unity Asset Store (free, not redistributed here)
+- Fantastic City Generator(https://assetstore.unity.com/packages/3d/environments/urban/fantastic-city-generator-157625?srsltid=AfmBOor8JeSilVjDWfEFBB6dlfeOQaRLs1C3hZzSB0GlR1vWENx7C1wY) — Unity Asset Store (paid, not redistributed here)
+- Prometeo Car Controller(https://assetstore.unity.com/packages/tools/physics/prometeo-car-controller-209444?srsltid=AfmBOorpxaAH9CCb6CiS0D7LwCHzM0QD9q4J37zMD2NZltRm_e0NOME3) — Unity Asset Store (free, not redistributed here)
 
 ## Author
 
