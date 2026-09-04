@@ -9,25 +9,41 @@
 
 A real-time autonomous driving simulation combining a Unity 3D city environment with a Python computer-vision brain. A simulated vehicle perceives its surroundings through YOLOv11 object detection and physics raycasts, then makes driving decisions through a transparent, priority-based rule engine — no black-box end-to-end model, every decision is traceable and explainable.
 
-![Unity simulation view](docs/unity-view.png)
-![Live AI dashboard](docs/dashboard.png)
+<p align="center">
+  <img src="docs/unity-view.png" width="800" alt="Unity simulation view"/>
+</p>
 
 ### Demo
 
-**Main walkthrough**
-![Main demo](docs/demo-main.gif)
+<p align="center">
+  <b>Main walkthrough</b><br/>
+  <img src="docs/demo-main.gif" width="800" alt="Main demo"/>
+</p>
 
-**Backend startup**
-![Backend startup](docs/demo-backend-start.gif)
+<p align="center">
+  <b>Backend / AI brain startup</b><br/>
+  <img src="docs/demo-backend-start.gif" width="800" alt="Backend startup"/>
+</p>
 
-**Autonomous navigation — turning**
-![Car turning](docs/car-turning.gif)
+<p align="center">
+  <b>Live dashboard — detection in action</b><br/>
+  <img src="docs/demo-dashboard-detection.gif" width="800" alt="Dashboard detection"/>
+</p>
 
-**Day/night view and camera views**
-![Day and night camera views](docs/demo-day-night-view.gif)
+<p align="center">
+  <b>Autonomous navigation — turning</b><br/>
+  <img src="docs/car-turning.gif" width="800" alt="Car turning"/>
+</p>
 
-**Live dashboard — detection in action**
-![Dashboard detection](docs/demo-dashboard-detection.gif)
+<p align="center">
+  <b>Day/night camera views</b><br/>
+  <img src="docs/demo-day-night-view.gif" width="800" alt="Day and night camera views"/>
+</p>
+
+<p align="center">
+  <b>Dashboard layout (reference)</b><br/>
+  <img src="docs/dashboard.png" width="800" alt="Live AI dashboard"/>
+</p>
 
 ---
 
@@ -240,6 +256,7 @@ autonoma/
 
 ---
 
+
 ## Credits & Third-Party Assets
 
 - [Ultralytics YOLOv11](https://docs.ultralytics.com)
@@ -249,3 +266,5 @@ autonoma/
 ## Author
 
 **Nida Sheraz** 
+
+
