@@ -28,9 +28,9 @@ if errorlevel 1 (
 )
 
 echo [2/3] Starting Unity project...
-:: Edit this path to your exact Unity project location
-set UNITY_PROJECT=D:\autonoma\unity
-set UNITY_EXE=C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Unity.exe
+
+set UNITY_PROJECT=D:\autonoma\unity\Autonoma
+set UNITY_EXE=C:\Program Files\Unity\Hub\Editor\6000.4.8f1\Editor\Unity.exe
 
 if exist "%UNITY_EXE%" (
     start "" "%UNITY_EXE%" -projectPath "%UNITY_PROJECT%"
