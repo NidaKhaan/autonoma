@@ -1,0 +1,39 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.env
+
+# Unity 
+unity/Autonoma/Library/
+unity/Autonoma/Temp/
+unity/Autonoma/Obj/
+unity/Autonoma/Build/
+unity/Autonoma/Builds/
+unity/Autonoma/Logs/
+unity/Autonoma/UserSettings/
+unity/Autonoma/.vs/
+*.csproj
+*.sln
+
+# Paid/third-party Unity Asset Store packages — see README for purchase links
+unity/Autonoma/Assets/Fantastic City Generator/
+unity/Autonoma/Assets/Fantastic City Generator.meta
+unity/Autonoma/Assets/Fantastic City Generator v3.1.1/
+unity/Autonoma/Assets/Fantastic City Generator v3.1.1.meta
+unity/Autonoma/Assets/FCG/
+unity/Autonoma/Assets/FCG.meta
+unity/Autonoma/Assets/PROMETEO - Car Controller/
+unity/Autonoma/Assets/PROMETEO - Car Controller.meta
+
+# Unity crash-recovery autosaves — not real content
+unity/Autonoma/Assets/_Recovery/
+unity/Autonoma/Assets/_Recovery.meta
+
+# YOLO weights — auto-downloaded by ultralytics, see README
+*.pt
+
+# OS
+.DS_Store
+Thumbs.db
